@@ -21,9 +21,7 @@
         </style>
     </head>
     <body class="antialiased">
-        <center>
-            <h2>you are my Love Renata</h2>
-        </center>
+        <img src="https://developers.giphy.com/branch/master/static/api-512d36c09662682717108a38bbb5c57d.gif" alt="">
         <script src="{{asset('js/app.js')}}"></script>
     </body>
 </html>
