@@ -17,11 +17,21 @@
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
+                background-image: url("https://developers.giphy.com/branch/master/static/api-512d36c09662682717108a38bbb5c57d.gif");
+                background-color: #c0c0c0;
+                background-repeat: repeat;
+                background-position: center;
+                width: 1vh;
+                height: 1vh;
+            }
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
         </style>
     </head>
     <body class="antialiased">
-        <img src="https://developers.giphy.com/branch/master/static/api-512d36c09662682717108a38bbb5c57d.gif" alt="">
         <script src="{{asset('js/app.js')}}"></script>
     </body>
 </html>
