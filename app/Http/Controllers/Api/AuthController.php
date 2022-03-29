@@ -48,16 +48,12 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-
         $requestToken = $request->header('authorization');
         $personalAccessToken = new PersonalAccessToken();
         $token = $personalAccessToken->findToken(str_replace('Bearer ','',$requestToken));
-
         $token->delete();
-
 //        $user = auth()->user();
 //        $user->tokens()->delete();
-
         return [
             'message' => 'Tokens Revoked'
         ];
