@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Api\AuthController;
 use \App\Http\Controllers\Api\LoginController;
+use \App\Http\Controllers\Api\CategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 Route::post('login',[LoginController::class,'authenticate']);
+
+
+Route::prefix('/categories')->group(function () {
+    Route::get('',[CategoriesController::class, 'index']);
+    Route::post('',[CategoriesController::class, 'store']);
+    Route::patch('/{id}',[CategoriesController::class, 'update']);
+    Route::get('/{id}',[CategoriesController::class, 'show']);
+    Route::delete('/{id}',[CategoriesController::class, 'disable']);
+    Route::post('/{id}/enable',[CategoriesController::class, 'enable']);
+});
