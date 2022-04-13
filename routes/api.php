@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Api\AuthController;
 use \App\Http\Controllers\Api\LoginController;
 use \App\Http\Controllers\Api\CategoriesController;
+use \App\Http\Controllers\Api\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,13 @@ Route::prefix('/categories')->group(function () {
     Route::get('/{id}',[CategoriesController::class, 'show']);
     Route::delete('/{id}',[CategoriesController::class, 'disable']);
     Route::post('/{id}/enable',[CategoriesController::class, 'enable']);
+});
+
+Route::prefix('/products')->group(function () {
+    Route::get('',[ProductsController::class, 'index']);
+    Route::post('',[ProductsController::class, 'store']);
+    Route::patch('/{id}',[ProductsController::class, 'update']);
+    Route::get('/{id}',[ProductsController::class, 'show']);
+    Route::delete('/{id}',[ProductsController::class, 'disable']);
+    Route::post('/{id}/enable',[ProductsController::class, 'enable']);
 });
