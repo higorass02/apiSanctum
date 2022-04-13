@@ -3,7 +3,7 @@
 namespace App\Exceptions\Validations\Products;
 
 use App\Models\Categories;
-use App\Models\Product;
+use App\Models\Products;
 
 class ProductsValidation
 {
@@ -11,9 +11,9 @@ class ProductsValidation
         if(!Categories::where('id',$payload['category_product'])->get()->last()){
             throw new \InvalidArgumentException("Dont found Category");
         }
-        $products = Product::where('title','like',$payload['title'])->get()->last();
+        $products = Products::where('title','like',$payload['title'])->get()->last();
         if($id){
-            $products = Product::where('title','like',$payload['title'])->where('id','<>',$id)->get()->last();
+            $products = Products::where('title','like',$payload['title'])->where('id','<>',$id)->get()->last();
         }
         if($products){
             throw new \InvalidArgumentException("Already Product with equals title");
@@ -21,13 +21,13 @@ class ProductsValidation
     }
 
     public static function isEnabled($product): void{
-        if($product->status != Product::STATUS_ENABLED){
+        if($product->status != Products::STATUS_ENABLED){
             throw new \InvalidArgumentException("Product already disabled");
         }
     }
 
     public static function isDisabled($product): void{
-        if($product->status != Product::STATUS_DISABLED){
+        if($product->status != Products::STATUS_DISABLED){
             throw new \InvalidArgumentException("Product already disabled");
         }
     }

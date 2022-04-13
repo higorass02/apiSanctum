@@ -6,7 +6,7 @@ use App\Exceptions\Validations\Products\ProductsValidation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductsRequest;
 use App\Models\Categories;
-use App\Models\Product;
+use App\Models\Products;
 use App\Traits\ApiResponser;
 use Illuminate\Http\JsonResponse;
 
@@ -20,11 +20,18 @@ class ProductsController extends Controller
     public function index()
     {
         try{
-            $products = Product::select('*')->where('status',Product::STATUS_ENABLED)->get();
-
+            $products = Products::select('*')->where('status',Products::STATUS_ENABLED)->get();
             ProductsValidation::isListEmpty($products);
+            $response = [];
+            foreach ($products as $key=>$product){
+                $category = Categories::select('title','description','created_at','updated_at')->where('id',$product->category_product)->where('status',Categories::STATUS_ENABLED)->get()->last();
+                if($category){
+                    $response[$key]['product'] = $product;
+                    $response[$key]['category'] = $category;
+                }
+            }
 
-            return $this->success($products,'load success!',200);
+            return $this->success($response,'load success!',200);
         }catch (\InvalidArgumentException $e){
             return $this->error($e->getMessage(),404);
         }catch (\Exception $e){
@@ -44,8 +51,8 @@ class ProductsController extends Controller
 
             ProductsValidation::isValidateAtributes($payload);
 
-            /** @var Product $product */
-            $product = new Product();
+            /** @var Products $product */
+            $product = new Products();
             $product->setAttribute('title',$payload['title']);
             $product->setAttribute('description',$payload['description']);
             if($payload['branch']){
@@ -61,7 +68,7 @@ class ProductsController extends Controller
             $product->setAttribute('value_capacity',$payload['value_capacity']);
             $product->setAttribute('price',$payload['price']);
             $product->setAttribute('star',$payload['star']);
-            $product->setAttribute('status',Product::STATUS_ENABLED);
+            $product->setAttribute('status',Products::STATUS_ENABLED);
             $product->setAttribute('category_product',$payload['category_product']);
             $product->save();
 
@@ -80,13 +87,19 @@ class ProductsController extends Controller
     public function show($id)
     {
         try{
-            /** @var Categories $category */
-            $category = Categories::where('id', $id)->where('status',true)->get()->last();
+            $products = Products::select('*')->where('id',$id)->get()->last();
+            ProductsValidation::isListEmpty($products);
 
-            ProductsValidation::isEnabled($category);
+            $response = [];
+            if($products){
+                $category = Categories::select('title','description','created_at','updated_at')->where('id',$products->category_product)->where('status',Categories::STATUS_ENABLED)->get()->last();
+                if($category){
+                    $response[0]['product'] = $products;
+                    $response[0]['category'] = $category;
+                }
+            }
 
-
-            return $this->success($category,'show success!',200);
+            return $this->success($response,'show success!',200);
         }catch (\InvalidArgumentException $e){
             return $this->error($e->getMessage(),404);
         }catch (\Exception $e){
@@ -106,8 +119,8 @@ class ProductsController extends Controller
 
             ProductsValidation::isValidateAtributes($payload,$id);
 
-            /** @var Product $product */
-            $product = Product::select('*')->where('id', $id)->get()->last();
+            /** @var Products $product */
+            $product = Products::select('*')->where('id', $id)->get()->last();
 
             ProductsValidation::isEnabled($product);
 
@@ -145,13 +158,13 @@ class ProductsController extends Controller
     {
 
         try{
-            /** @var Product $product */
-            $product = Product::where('id', $id)->get()->last();
+            /** @var Products $product */
+            $product = Products::where('id', $id)->get()->last();
 
             ProductsValidation::isExist($product, $id);
             ProductsValidation::isEnabled($product);
 
-            $product->setAttribute('status',Product::STATUS_DISABLED);
+            $product->setAttribute('status',Products::STATUS_DISABLED);
             $product->update();
 
             return $this->success($product,'disable success!',200);
@@ -169,12 +182,12 @@ class ProductsController extends Controller
     public function enable($id)
     {
         try{
-            /** @var Product $product */
-            $product = Product::where('id', $id)->get()->last();
+            /** @var Products $product */
+            $product = Products::where('id', $id)->get()->last();
 
             ProductsValidation::isDisabled($product);
 
-            $product->setAttribute('status',Product::STATUS_ENABLED);
+            $product->setAttribute('status',Products::STATUS_ENABLED);
             $product->update();
 
             return $this->success($product,'enable success!',200);

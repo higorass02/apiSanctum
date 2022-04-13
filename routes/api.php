@@ -6,6 +6,7 @@ use \App\Http\Controllers\Api\AuthController;
 use \App\Http\Controllers\Api\LoginController;
 use \App\Http\Controllers\Api\CategoriesController;
 use \App\Http\Controllers\Api\ProductsController;
+use \App\Http\Controllers\Api\ProductsStockController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,4 +54,12 @@ Route::prefix('/products')->group(function () {
     Route::get('/{id}',[ProductsController::class, 'show']);
     Route::delete('/{id}',[ProductsController::class, 'disable']);
     Route::post('/{id}/enable',[ProductsController::class, 'enable']);
+});
+
+Route::prefix('/products-stock')->group(function () {
+    Route::get('',[ProductsStockController::class, 'index']);
+    Route::post('',[ProductsStockController::class, 'store']);
+    Route::patch('/{id}',[ProductsStockController::class, 'update']);
+    Route::get('/{id}',[ProductsStockController::class, 'show']);
+    Route::delete('/{id}',[ProductsStockController::class, 'delete']);
 });
