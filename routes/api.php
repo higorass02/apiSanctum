@@ -62,4 +62,5 @@ Route::prefix('/products-stock')->group(function () {
     Route::patch('/{id}',[ProductsStockController::class, 'update']);
     Route::get('/{id}',[ProductsStockController::class, 'show']);
     Route::delete('/{id}',[ProductsStockController::class, 'delete']);
+    Route::get('/for-product/{id}',[ProductsStockController::class, 'showStockForProduct']);
 });

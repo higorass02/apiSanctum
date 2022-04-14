@@ -134,4 +134,32 @@ class ProductsStockController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return JsonResponse
+     */
+    public function showStockForProduct($id)
+    {
+        try{
+            /** @var Products $products */
+            $product = Products::where('id', $id)->get()->last();
+
+            $response = [];
+            if($product){
+                /** @var ProductsStock $productsStock */
+                $productsStock = ProductsStock::where('product_stock', $product->id)->get();
+
+                if($productsStock){
+                    $response[0]['productsStock'] = $productsStock;
+                    $response[0]['product'] = $product;
+                }
+            }
+            return $this->success($response,'show success!',200);
+        }catch (\InvalidArgumentException $e){
+            return $this->error($e->getMessage(),404);
+        }catch (\Exception $e){
+            return $this->error($e->getMessage(),404);
+        }
+    }
+
 }
