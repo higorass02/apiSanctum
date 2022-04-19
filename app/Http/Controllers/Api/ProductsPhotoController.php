@@ -6,7 +6,6 @@ use App\Exceptions\Validations\Products\ProductsValidation;
 use App\Exceptions\Validations\ProductsPhoto\ProductsPhotoValidation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductsPhotoRequest;
-use App\Http\Requests\ProductsStockRequest;
 use App\Models\Products;
 use App\Models\ProductsPhotos;
 use App\Traits\ApiResponser;
@@ -90,9 +89,9 @@ class ProductsPhotoController extends Controller
                 $product = Products::select('*')->where('id',$productsPhoto->product_photo)->get()->last();
 
                 ProductsValidation::isExist($product,$productsPhoto->product_photo);
-                
+
                 if($product){
-                    $response[0]['productsStock'] = $productsPhoto;
+                    $response[0]['productsPhoto'] = $productsPhoto;
                     $response[0]['product'] = $product;
                 }
             }
