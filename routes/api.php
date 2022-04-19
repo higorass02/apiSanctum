@@ -7,6 +7,7 @@ use \App\Http\Controllers\Api\LoginController;
 use \App\Http\Controllers\Api\CategoriesController;
 use \App\Http\Controllers\Api\ProductsController;
 use \App\Http\Controllers\Api\ProductsStockController;
+use \App\Http\Controllers\Api\ProductsPhotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,3 +65,13 @@ Route::prefix('/products-stock')->group(function () {
     Route::delete('/{id}',[ProductsStockController::class, 'delete']);
     Route::get('/for-product/{id}',[ProductsStockController::class, 'showStockForProduct']);
 });
+
+Route::prefix('/products-photo')->group(function () {
+    Route::get('',[ProductsPhotoController::class, 'index']);
+    Route::post('',[ProductsPhotoController::class, 'store']);
+    Route::patch('/{id}',[ProductsPhotoController::class, 'update']);
+    Route::get('/{id}',[ProductsPhotoController::class, 'show']);
+    Route::delete('/{id}',[ProductsPhotoController::class, 'delete']);
+    Route::get('/for-product/{id}',[ProductsPhotoController::class, 'showPhotoForProduct']);
+});
+
