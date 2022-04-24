@@ -9,6 +9,7 @@ use App\Models\Categories;
 use App\Models\Products;
 use App\Traits\ApiResponser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
@@ -112,7 +113,7 @@ class ProductsController extends Controller
      * @param $id
      * @return JsonResponse
      */
-    public function update(ProductsRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try{
             $payload = $request->all();

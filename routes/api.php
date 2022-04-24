@@ -8,6 +8,7 @@ use \App\Http\Controllers\Api\CategoriesController;
 use \App\Http\Controllers\Api\ProductsController;
 use \App\Http\Controllers\Api\ProductsStockController;
 use \App\Http\Controllers\Api\ProductsPhotoController;
+use \App\Http\Controllers\Api\ProductsSalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,5 +74,14 @@ Route::prefix('/products-photo')->group(function () {
     Route::get('/{id}',[ProductsPhotoController::class, 'show']);
     Route::delete('/{id}',[ProductsPhotoController::class, 'delete']);
     Route::get('/for-product/{id}',[ProductsPhotoController::class, 'showPhotoForProduct']);
+});
+
+Route::prefix('/products-sales')->group(function () {
+    Route::get('',[ProductsSalesController::class, 'index']);
+    Route::post('',[ProductsSalesController::class, 'store']);
+    Route::patch('/{id}',[ProductsSalesController::class, 'update']);
+    Route::get('/{id}',[ProductsSalesController::class, 'show']);
+    Route::delete('/{id}',[ProductsSalesController::class, 'delete']);
+    Route::get('/for-product/{id}',[ProductsSalesController::class, 'showSaleForProduct']);
 });
 

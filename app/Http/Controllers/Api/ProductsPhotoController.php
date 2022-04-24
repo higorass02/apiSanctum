@@ -10,6 +10,7 @@ use App\Models\Products;
 use App\Models\ProductsPhotos;
 use App\Traits\ApiResponser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ProductsPhotoController extends Controller
 {
@@ -103,7 +104,7 @@ class ProductsPhotoController extends Controller
         }
     }
 
-    public function update(ProductsPhotoRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try{
             $payload = $request->all();

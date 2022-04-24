@@ -78,7 +78,7 @@ class CategoriesController extends Controller
         }
     }
 
-    public function update(CategoriesRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try{
             $payload = $request->all();

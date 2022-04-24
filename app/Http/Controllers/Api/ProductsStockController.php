@@ -10,6 +10,7 @@ use App\Models\Products;
 use App\Models\ProductsStock;
 use App\Traits\ApiResponser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ProductsStockController extends Controller
 {
@@ -94,7 +95,7 @@ class ProductsStockController extends Controller
         }
     }
 
-    public function update(ProductsStockRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try{
             $payload = $request->all();
