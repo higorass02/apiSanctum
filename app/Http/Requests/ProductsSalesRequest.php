@@ -24,9 +24,8 @@ class ProductsSalesRequest extends FormRequest
     public function rules()
     {
         return [
-            'type' => 'required|string',
-            'value' => 'required|string',
             'qtd' => 'required|integer',
+            'dt_expired' => 'required|string',
             'product_sale' => 'required|integer',
         ];
     }
@@ -34,9 +33,8 @@ class ProductsSalesRequest extends FormRequest
     public function message()
     {
         return [
-            'type.required' => 'O campo type é obrigatório!',
-            'value.required' => 'O campo value é obrigatório!',
             'qtd.required' => 'O campo qtd é obrigatório!',
+            'dt_expired.required' => 'O campo dt_expired é obrigatório!',
             'product_sale.required' => 'O campo product_sale é obrigatório!',
         ];
     }

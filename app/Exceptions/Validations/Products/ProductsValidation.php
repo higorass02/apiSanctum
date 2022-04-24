@@ -44,4 +44,9 @@ class ProductsValidation
         }
     }
 
+    public static function isDirty($product): void{
+        if(!$product->isDirty()){
+            throw new \InvalidArgumentException("There is no change the Product");
+        }
+    }
 }

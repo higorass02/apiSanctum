@@ -30,7 +30,7 @@ class ProductsRequest extends FormRequest
             'model' => 'nullable|string|max:255',
             'type_capacity' => 'required|integer|max:255',
             'value_capacity' => 'required|string|max:255',
-            'validity' => 'nullable|datetime|max:255',
+            'validity' => 'nullable|string',
             'price' => 'required|numeric|max:255',
             'star' => 'required|integer|max:255',
             'category_product' => 'required|integer|max:255',

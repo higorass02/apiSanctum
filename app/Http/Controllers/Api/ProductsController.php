@@ -8,6 +8,7 @@ use App\Http\Requests\ProductsRequest;
 use App\Models\Categories;
 use App\Models\Products;
 use App\Traits\ApiResponser;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -54,23 +55,25 @@ class ProductsController extends Controller
 
             /** @var Products $product */
             $product = new Products();
+
             $product->setAttribute('title',$payload['title']);
             $product->setAttribute('description',$payload['description']);
-            if($payload['branch']){
-                $product->setAttribute('branch',$payload['branch']);
-            }
-            if($payload['model']){
-                $product->setAttribute('model',$payload['model']);
-            }
-            if($payload['validity']){
-                $product->setAttribute('validity',$payload['validity']);
-            }
             $product->setAttribute('type_capacity',$payload['type_capacity']);
             $product->setAttribute('value_capacity',$payload['value_capacity']);
             $product->setAttribute('price',$payload['price']);
             $product->setAttribute('star',$payload['star']);
-            $product->setAttribute('status',Products::STATUS_ENABLED);
             $product->setAttribute('category_product',$payload['category_product']);
+
+            if(!empty($payload['branch'])){
+                $product->setAttribute('branch',$payload['branch']);
+            }
+            if(!empty($payload['model'])){
+                $product->setAttribute('model',$payload['model']);
+            }
+            if(!empty($payload['validity'])){
+                $product->setAttribute('validity',Carbon::createFromFormat('d/m/Y',$payload['validity'])->setTime(23,59,59));
+            }
+
             $product->save();
 
             return $this->success($product,'save success',200);
@@ -127,6 +130,12 @@ class ProductsController extends Controller
 
             $product->setAttribute('title',$payload['title']);
             $product->setAttribute('description',$payload['description']);
+            $product->setAttribute('type_capacity',$payload['type_capacity']);
+            $product->setAttribute('value_capacity',$payload['value_capacity']);
+            $product->setAttribute('price',$payload['price']);
+            $product->setAttribute('star',$payload['star']);
+            $product->setAttribute('category_product',$payload['category_product']);
+
             if($payload['branch']){
                 $product->setAttribute('branch',$payload['branch']);
             }
@@ -134,13 +143,9 @@ class ProductsController extends Controller
                 $product->setAttribute('model',$payload['model']);
             }
             if($payload['validity']){
-                $product->setAttribute('validity',$payload['validity']);
+                $product->setAttribute('validity',Carbon::createFromFormat('d/m/Y',$payload['validity'])->setTime(23,59,59));
             }
-            $product->setAttribute('type_capacity',$payload['type_capacity']);
-            $product->setAttribute('value_capacity',$payload['value_capacity']);
-            $product->setAttribute('price',$payload['price']);
-            $product->setAttribute('star',$payload['star']);
-            $product->setAttribute('category_product',$payload['category_product']);
+            ProductsValidation::isDirty($product);
             $product->update();
 
             return $this->success($product,'update success!',200);

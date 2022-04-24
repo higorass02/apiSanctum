@@ -87,10 +87,16 @@ class CategoriesController extends Controller
             $category = Categories::select('id','title','description','spotlight','status')->where('id', $id)->get()->last();
 
             CategoriesValidation::isEnabled($category);
-
-            $category->setAttribute('title',$payload['title']);
-            $category->setAttribute('description',$payload['description']);
-            $category->setAttribute('spotlight',$payload['spotlight']);
+            if(!empty($payload['title'])){
+                $category->setAttribute('title',$payload['title']);
+            }
+            if(!empty($payload['description'])){
+                $category->setAttribute('description',$payload['description']);
+            }
+            if(!empty($payload['spotlight'])){
+                $category->setAttribute('spotlight',$payload['spotlight']);
+            }
+            CategoriesValidation::isDirty($category);
             $category->update();
 
             return $this->success($category,'update success!',200);
@@ -114,7 +120,7 @@ class CategoriesController extends Controller
 
 
             CategoriesValidation::isExist($category, $id);
-            CategoriesValidation::isDisabled($category);
+            CategoriesValidation::isEnabled($category);
 
             $category->setAttribute('status',Categories::STATUS_DISABLED);
             $category->update();
@@ -137,7 +143,7 @@ class CategoriesController extends Controller
             /** @var Categories $category */
             $category = Categories::where('id', $id)->get()->last();
 
-            CategoriesValidation::isEnabled($category);
+            CategoriesValidation::isDisabled($category);
 
             $category->setAttribute('status',Categories::STATUS_ENABLED);
             $category->update();

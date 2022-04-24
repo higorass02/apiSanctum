@@ -29,5 +29,8 @@ class ProductsSales extends Model
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'status' => 'boolean',
+        'dt_expired' => 'datetime',
+    ];
 }

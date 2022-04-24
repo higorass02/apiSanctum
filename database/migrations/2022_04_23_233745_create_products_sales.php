@@ -15,8 +15,6 @@ class CreateProductsSales extends Migration
     {
         Schema::create('products_sales', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type')->nullable(false);
-            $table->string('value')->nullable(false);
             $table->dateTime('dt_expired')->nullable(true);
             $table->boolean('status')->nullable(false);
             $table->integer('qtd')->nullable(false);

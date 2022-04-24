@@ -57,8 +57,6 @@ class ProductsSalesController extends Controller
 
             /** @var ProductsSales $ProductsSales */
             $ProductsSales = new ProductsSales();
-            $ProductsSales->setAttribute('type',$payload['type']);
-            $ProductsSales->setAttribute('value',$payload['value']);
             $ProductsSales->setAttribute('qtd',$payload['qtd']);
             $ProductsSales->setAttribute('status',ProductsSales::STATUS_ENABLED);
             $ProductsSales->setAttribute('product_sale',$payload['product_sale']);
@@ -113,13 +111,7 @@ class ProductsSalesController extends Controller
             /** @var ProductsSales $ProductsSales */
             $ProductsSales = ProductsSales::select('*')->where('id', $id)->get()->last();
 
-            if(!empty($payload['type'])){
-                $ProductsSales->setAttribute('type',$payload['type']);
-            }
-            if(!empty($payload['value'])){
-                $ProductsSales->setAttribute('value',$payload['value']);
-            }
-            if(!empty($payload['dt_expired'])){
+            if(!empty($payload['qtd'])){
                 $ProductsSales->setAttribute('qtd',$payload['qtd']);
             }
             if(!empty($payload['dt_expired'])){
