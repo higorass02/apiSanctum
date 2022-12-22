@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Store;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductsPhotos extends Model
+class ProductsSales extends Model
 {
     const STATUS_ENABLED = true;
     const STATUS_DISABLED = false;
-
-    protected $table = 'products_photos';
+    protected $table = 'products_sales';
 
     /**
      * The attributes that are mass assignable.
@@ -30,5 +29,8 @@ class ProductsPhotos extends Model
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'status' => 'boolean',
+        'dt_expired' => 'datetime',
+    ];
 }

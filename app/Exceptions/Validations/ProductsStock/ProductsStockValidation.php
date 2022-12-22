@@ -2,9 +2,9 @@
 
 namespace App\Exceptions\Validations\ProductsStock;
 
-use App\Models\Categories;
-use App\Models\Products;
-use App\Models\ProductsStock;
+use App\Models\Store\Categories;
+use App\Models\Store\Products;
+use App\Models\Store\ProductsStock;
 
 class ProductsStockValidation
 {

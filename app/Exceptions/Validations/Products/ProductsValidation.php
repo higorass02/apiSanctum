@@ -2,8 +2,8 @@
 
 namespace App\Exceptions\Validations\Products;
 
-use App\Models\Categories;
-use App\Models\Products;
+use App\Models\Store\Categories;
+use App\Models\Store\Products;
 
 class ProductsValidation
 {

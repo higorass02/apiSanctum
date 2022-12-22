@@ -1,14 +1,19 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Store;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductsSales extends Model
+class Products extends Model
 {
     const STATUS_ENABLED = true;
     const STATUS_DISABLED = false;
-    protected $table = 'products_sales';
+
+    const TYPE_CAPACITY_WEIGHT = 0;
+    const STATUS_DISABLED_SIZE = 1;
+    const STATUS_DISABLED_VOLUME = 3;
+
+    const MAX_STARS = 5;
 
     /**
      * The attributes that are mass assignable.
@@ -31,6 +36,12 @@ class ProductsSales extends Model
      */
     protected $casts = [
         'status' => 'boolean',
-        'dt_expired' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
+
+    public function categories()
+    {
+        return $this->hasOne(Categories::class, 'id', 'category_product');
+    }
 }

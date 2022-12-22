@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Store;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductsStock extends Model
+class ProductsPhotos extends Model
 {
-    protected $table = 'products_stock';
+    const STATUS_ENABLED = true;
+    const STATUS_DISABLED = false;
+
+    protected $table = 'products_photos';
 
     /**
      * The attributes that are mass assignable.

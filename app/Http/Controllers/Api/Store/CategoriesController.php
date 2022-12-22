@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Exceptions\Validations\Categories\CategoriesValidation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoriesRequest;
-use App\Models\Categories;
+use App\Models\Store\Categories;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Client\Response;
 use Illuminate\Http\JsonResponse;

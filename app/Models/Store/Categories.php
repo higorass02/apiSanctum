@@ -1,20 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Store;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Products extends Model
+class Categories extends Model
 {
     const STATUS_ENABLED = true;
     const STATUS_DISABLED = false;
-
-    const TYPE_CAPACITY_WEIGHT = 0;
-    const STATUS_DISABLED_SIZE = 1;
-    const STATUS_DISABLED_VOLUME = 3;
-
-    const MAX_STARS = 5;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -36,12 +29,13 @@ class Products extends Model
      */
     protected $casts = [
         'status' => 'boolean',
+        'spotlight' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
 
-    public function categories()
+    public function products()
     {
-        return $this->hasOne(Categories::class, 'id', 'category_product');
+        return $this->hasMany(Products::class, 'category_product', 'id');
     }
 }

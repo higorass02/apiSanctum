@@ -2,7 +2,7 @@
 
 namespace App\Exceptions\Validations\ProductsSales;
 
-use App\Models\Products;
+use App\Models\Store\Products;
 
 class ProductsSalesValidation
 {

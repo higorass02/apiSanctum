@@ -3,8 +3,8 @@
 namespace App\Exceptions\Validations\ProductsPhoto;
 
 
-use App\Models\Products;
-use App\Models\ProductsPhotos;
+use App\Models\Store\Products;
+use App\Models\Store\ProductsPhotos;
 
 class ProductsPhotoValidation
 {

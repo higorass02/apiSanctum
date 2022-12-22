@@ -2,7 +2,7 @@
 
 namespace App\Exceptions\Validations\Categories;
 
-use App\Models\Categories;
+use App\Models\Store\Categories;
 
 class CategoriesValidation
 {
