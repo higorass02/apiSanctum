@@ -6,6 +6,7 @@ use \App\Http\Controllers\Api\AuthController;
 use \App\Http\Controllers\Api\LoginController;
 use \App\Http\Controllers\Api\Store\CategoriesController;
 use \App\Http\Controllers\Api\Salao\ClienteController;
+use \App\Http\Controllers\Api\Salao\ServicesController;
 use \App\Http\Controllers\Api\Store\ProductsController;
 use \App\Http\Controllers\Api\Store\ProductsStockController;
 use \App\Http\Controllers\Api\Store\ProductsPhotoController;
@@ -96,5 +97,13 @@ Route::prefix('/salao')->group(function () {
         Route::delete('/{id}',[ClienteController::class, 'disable']);
         Route::post('/{id}/enable',[ClienteController::class, 'enable']);
         Route::post('/suggestion',[ClienteController::class, 'cLienteSuggestion']);
+    });
+    Route::prefix('/services')->group(function () {
+        Route::get('',[ServicesController::class, 'index']);
+        Route::post('',[ServicesController::class, 'store']);
+        Route::patch('/{id}',[ServicesController::class, 'update']);
+        Route::get('/{id}',[ServicesController::class, 'show']);
+        Route::delete('/{id}',[ServicesController::class, 'disable']);
+        Route::post('/{id}/enable',[ServicesController::class, 'enable']);
     });
 });

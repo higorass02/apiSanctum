@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ClienteUpdateRequest extends FormRequest
+class ServicesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,16 +26,14 @@ class ClienteUpdateRequest extends FormRequest
         return [
             'id' => 'nullable|integer|max:255',
             'name' => 'nullable|string|max:255',
-            'number' => 'nullable|string|max:255',
-            'email' => 'nullable|string|max:255',
-            'dt_birthday' => 'nullable|string',
+            'type' => 'nullable|integer|max:1',
+            'desc' => 'nullable|string|max:255',
         ];
     }
 
     public function message()
     {
         return [
-            'id.required' => 'The field "name" is required!',
         ];
     }
 }

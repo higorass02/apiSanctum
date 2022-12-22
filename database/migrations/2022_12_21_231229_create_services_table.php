@@ -17,7 +17,7 @@ class CreateServicesTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable(false);
             $table->string('type')->nullable(true);
-            $table->integer('desc')->nullable(false);
+            $table->string('desc')->nullable(false);
             $table->integer('status')->default(1);
             $table->timestamps();
         });
