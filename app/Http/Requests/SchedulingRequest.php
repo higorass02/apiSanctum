@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ServicesRequest extends FormRequest
+class SchedulingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,15 +25,17 @@ class ServicesRequest extends FormRequest
     {
         return [
             'id' => 'nullable|integer|max:255',
-            'name' => 'nullable|string|max:255',
-            'type' => 'nullable|integer|max:10',
-            'desc' => 'nullable|string|max:255',
+            'id_cliente' => 'required|integer|max:255',
+            'id_services' => 'required|integer|max:10',
+            'dt_scheduling' => 'required|string|max:255',
         ];
     }
 
     public function message()
     {
         return [
+            'id_cliente.required' => 'The Field id_cliente is required!',
+            'id_services.required' => 'The Field id_services is required!'
         ];
     }
 }

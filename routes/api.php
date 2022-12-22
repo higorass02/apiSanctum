@@ -7,6 +7,7 @@ use \App\Http\Controllers\Api\LoginController;
 use \App\Http\Controllers\Api\Store\CategoriesController;
 use \App\Http\Controllers\Api\Salao\ClienteController;
 use \App\Http\Controllers\Api\Salao\ServicesController;
+use \App\Http\Controllers\Api\Salao\SchedulingController;
 use \App\Http\Controllers\Api\Store\ProductsController;
 use \App\Http\Controllers\Api\Store\ProductsStockController;
 use \App\Http\Controllers\Api\Store\ProductsPhotoController;
@@ -105,5 +106,13 @@ Route::prefix('/salao')->group(function () {
         Route::get('/{id}',[ServicesController::class, 'show']);
         Route::delete('/{id}',[ServicesController::class, 'disable']);
         Route::post('/{id}/enable',[ServicesController::class, 'enable']);
+    });
+    Route::prefix('/scheduling')->group(function () {
+        Route::get('',[SchedulingController::class, 'index']);
+        Route::post('',[SchedulingController::class, 'store']);
+        Route::patch('/{id}',[SchedulingController::class, 'update']);
+        Route::get('/{id}',[SchedulingController::class, 'show']);
+        Route::delete('/{id}',[SchedulingController::class, 'disable']);
+        Route::post('/{id}/enable',[SchedulingController::class, 'enable']);
     });
 });

@@ -148,7 +148,7 @@ class ServicesController extends Controller
             /** @var Services $services */
             $services = Services::where('id', $id)->get()->last();
 
-            ServicesValidation::isDisabled($services);
+            ServicesValidation::isEnabled($services);
 
             $services->setAttribute('status',Services::STATUS_ENABLED);
             $services->update();

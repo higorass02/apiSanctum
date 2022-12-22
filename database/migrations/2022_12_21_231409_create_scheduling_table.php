@@ -15,6 +15,7 @@ class CreateSchedulingTable extends Migration
     {
         Schema::create('scheduling', function (Blueprint $table) {
             $table->increments('id');
+            $table->date('dt_scheduling')->nullable(true);
             $table->integer('id_cliente')->unsigned()->nullable(false);
             $table->integer('id_services')->unsigned()->nullable(false);
             $table->integer('status')->default(1);

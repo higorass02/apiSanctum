@@ -25,7 +25,7 @@ class ServicesValidation
 
     public static function isDisabled($services): void{
         if($services->status != Services::STATUS_DISABLED){
-            throw new \InvalidArgumentException("Service already disabled");
+            throw new \InvalidArgumentException("Service already enabled");
         }
     }
 
